@@ -789,7 +789,7 @@ document.getElementById('quranForm').addEventListener('submit', async function(e
         city: document.getElementById('city').value,
         state: document.getElementById('state').value,
         country: document.getElementById('country').value,
-        religion: document.getElementById('are_you').value,
+        religion: document.getElementById('religion').value,
         message: document.getElementById('message').value
     };
 
@@ -1051,7 +1051,8 @@ document.getElementById('quranForm').addEventListener('submit', async function(e
             // Disable submit button
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
-            
+
+			
             // Get form data
             const formData = {
                 fields: [
@@ -1070,6 +1071,11 @@ document.getElementById('quranForm').addEventListener('submit', async function(e
                         name: "email",
                         value: document.getElementById('email').value
                     },
+					 {
+                        objectTypeId: "0-1",
+                        name: "phone",
+                        value: document.getElementById('phone').value
+                    },
                     {
                         objectTypeId: "0-1",
                         name: "address",
@@ -1087,8 +1093,8 @@ document.getElementById('quranForm').addEventListener('submit', async function(e
                     },
                     {
                         objectTypeId: "0-1",
-                        name: "zip",
-                        value: document.getElementById('zip').value
+                        name: "religion",
+                        value: document.getElementById('religion').value
                     },
                     {
                         objectTypeId: "0-1",
@@ -1160,5 +1166,6 @@ document.getElementById('quranForm').addEventListener('submit', async function(e
 </body>
 
 </html>
+
 
 
