@@ -780,36 +780,32 @@
 document.getElementById('quranForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const formData = {
-        firstname: document.getElementById('firstname').value,
-        lastname: document.getElementById('lastname').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        state: document.getElementById('state').value,
-        country: document.getElementById('country').value,
-        religion: document.getElementById('religion').value,
-        message: document.getElementById('message').value
-    };
+    const formData = new FormData();
 
-    try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbyoyeAGgJMT33rHn5erji8ludhgmuOp5HW2AdHyG8omv8U5r34B0K2E4nVMbU17z3a0/exec", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
-        });
+formData.append("firstname", getValue("firstname"));
+formData.append("lastname", getValue("lastname"));
+formData.append("email", getValue("email"));
+formData.append("phone", getValue("phone"));
+formData.append("address", getValue("address"));
+formData.append("city", getValue("city"));
+formData.append("state", getValue("state"));
+formData.append("country", getValue("country"));
+formData.append("religion", getValue("are_you"));
+formData.append("message", getValue("message"));
 
-        const result = await response.json();
-        if(result.status === "success") {
-            alert("Form submitted successfully!");
-            document.getElementById('quranForm').reset();
-        } else {
-            alert("Error submitting form: " + result.message);
-        }
-    } catch (err) {
-        alert("Error submitting form: " + err);
-    }
+fetch("https://script.google.com/macros/s/AKfycbyoyeAGgJMT33rHn5erji8ludhgmuOp5HW2AdHyG8omv8U5r34B0K2E4nVMbU17z3a0/exec", {
+    method: "POST",
+    body: formData
+})
+.then(res => res.json())
+.then(data => {
+    alert("Form submitted successfully!");
+})
+.catch(err => {
+    console.error(err);
+    alert("Submission failed.");
+});
+
 });
 
 </script>
@@ -1166,6 +1162,7 @@ document.getElementById('quranForm').addEventListener('submit', async function(e
 </body>
 
 </html>
+
 
 
 
