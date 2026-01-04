@@ -1104,13 +1104,34 @@ document.getElementById('quranForm').addEventListener('submit', async function (
         }
 
         // ✅ SUCCESS
-        successMessage.style.display = "block";
-        document.getElementById('quranForm').reset();
 
-        successMessage.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+		//new
+		// Show success message
+		successMessage.style.display = 'block';
+		
+		// Reset form
+		document.getElementById('quranForm').reset();
+		
+		// Smooth scroll to order section
+		document.getElementById('order').scrollIntoView({
+		    behavior: 'smooth',
+		    block: 'start'
+		});
+		
+		// Re-enable button after delay
+		setTimeout(() => {
+		    submitBtn.disabled = false;
+		    submitBtn.textContent = 'Request Free Quran';
+		}, 5000);
+		// new
+		
+        //successMessage.style.display = "block";
+        //document.getElementById('quranForm').reset();
+
+        //successMessage.scrollIntoView({
+            //behavior: "smooth",
+            //block: "start"
+        //});
 
         submitBtn.textContent = "Submitted";
 
@@ -1125,6 +1146,7 @@ document.getElementById('quranForm').addEventListener('submit', async function (
 </body>
 
 </html>
+
 
 
 
