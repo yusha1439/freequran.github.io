@@ -776,43 +776,6 @@
 
             <button type="submit" class="submit-btn" id="submitBtn">Request Free Quran</button>
         </form>
-<script>
-	function getValue(id) {
-    const el = document.getElementById(id);
-    return el ? el.value.trim() : "";
-}
-document.getElementById('quranForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const formData = new FormData();
-
-formData.append("firstname", getValue("firstname"));
-formData.append("lastname", getValue("lastname"));
-formData.append("email", getValue("email"));
-formData.append("phone", getValue("phone"));
-formData.append("address", getValue("address"));
-formData.append("city", getValue("city"));
-formData.append("state", getValue("state"));
-formData.append("country", getValue("country"));
-formData.append("religion", getValue("religion"));
-formData.append("message", getValue("message"));
-
-fetch("https://script.google.com/macros/s/AKfycbxDP1hPpF8WCD5AFU2U7ye8HfDm9mDIKYLWdgmeGnGcmKiq8z2vniaxBG-HpTIH93Ar/exec", {
-    method: "POST",
-    body: formData
-})
-.then(res => res.json())
-.then(data => {
-    alert("Form submitted successfully!");
-})
-.catch(err => {
-    console.error(err);
-    alert("Submission failed.");
-});
-
-});
-
-</script>
 
 <! -->
 
@@ -1041,111 +1004,6 @@ fetch("https://script.google.com/macros/s/AKfycbxDP1hPpF8WCD5AFU2U7ye8HfDm9mDIKY
             }
         }
 
-        // Form submission
-        document.getElementById('quranForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const successMessage = document.getElementById('successMessage');
-            
-            // Disable submit button
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-
-			
-            // Get form data
-            const formData = {
-                fields: [
-                    {
-                        objectTypeId: "0-1",
-                        name: "firstname",
-                        value: document.getElementById('firstname').value
-                    },
-                    {
-                        objectTypeId: "0-1",
-                        name: "lastname",
-                        value: document.getElementById('lastname').value
-                    },
-                    {
-                        objectTypeId: "0-1",
-                        name: "email",
-                        value: document.getElementById('email').value
-                    },
-					 {
-                        objectTypeId: "0-1",
-                        name: "phone",
-                        value: document.getElementById('phone').value
-                    },
-                    {
-                        objectTypeId: "0-1",
-                        name: "address",
-                        value: document.getElementById('address').value
-                    },
-                    {
-                        objectTypeId: "0-1",
-                        name: "city",
-                        value: document.getElementById('city').value
-                    },
-                    {
-                        objectTypeId: "0-1",
-                        name: "state",
-                        value: document.getElementById('state').value
-                    },
-                    {
-                        objectTypeId: "0-1",
-                        name: "religion",
-                        value: document.getElementById('religion').value
-                    },
-                    {
-                        objectTypeId: "0-1",
-                        name: "message",
-                        value: document.getElementById('message').value
-                    },
-                    {
-                        objectTypeId: "0-1",
-                        name: "country",
-                        value: document.getElementById('country').value
-                    }
-                ],
-                context: {
-                    pageUri: window.location.href,
-                    pageName: document.title
-                }
-            };
-
-            try {
-                const response = await fetch('https://api.hsforms.com/submissions/v3/integration/submit/244755533/bc1bde29-2a92-4e2e-9460-aa4d222112f1', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    // Show success message
-                    successMessage.style.display = 'block';
-                    // Reset form
-                    document.getElementById('quranForm').reset();
-                    // Scroll to success message
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    
-                    // Reset button after 3 seconds
-                    setTimeout(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Request Free Quran';
-                        successMessage.style.display = 'none';
-                    }, 5000);
-                } else {
-                    throw new Error('Submission failed');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('There was an error submitting your request. Please try again.');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Request Free Quran';
-            }
-        });
 
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1163,9 +1021,111 @@ fetch("https://script.google.com/macros/s/AKfycbxDP1hPpF8WCD5AFU2U7ye8HfDm9mDIKY
             });
         });
     </script>
+	<script>
+function getValue(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+}
+
+document.getElementById('quranForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    /* =========================
+       GOOGLE SHEETS SUBMISSION
+       ========================= */
+    const sheetFormData = new FormData();
+    sheetFormData.append("firstname", getValue("firstname"));
+    sheetFormData.append("lastname", getValue("lastname"));
+    sheetFormData.append("email", getValue("email"));
+    sheetFormData.append("phone", getValue("phone"));
+    sheetFormData.append("address", getValue("address"));
+    sheetFormData.append("city", getValue("city"));
+    sheetFormData.append("state", getValue("state"));
+    sheetFormData.append("country", getValue("country"));
+    sheetFormData.append("religion", getValue("religion"));
+    sheetFormData.append("message", getValue("message"));
+
+    const googleSheetRequest = fetch(
+        "https://script.google.com/macros/s/AKfycbxDP1hPpF8WCD5AFU2U7ye8HfDm9mDIKYLWdgmeGnGcmKiq8z2vniaxBG-HpTIH93Ar/exec",
+        {
+            method: "POST",
+            body: sheetFormData
+        }
+    );
+
+    /* =========================
+       HUBSPOT SUBMISSION
+       ========================= */
+    const hubspotData = {
+        fields: [
+            { name: "firstname", value: getValue("firstname") },
+            { name: "lastname", value: getValue("lastname") },
+            { name: "email", value: getValue("email") },
+            { name: "phone", value: getValue("phone") },
+            { name: "address", value: getValue("address") },
+            { name: "city", value: getValue("city") },
+            { name: "state", value: getValue("state") },
+            { name: "country", value: getValue("country") },
+            { name: "religion", value: getValue("religion") },
+            { name: "message", value: getValue("message") }
+        ],
+        context: {
+            pageUri: window.location.href,
+            pageName: document.title
+        }
+    };
+
+    const hubspotRequest = fetch(
+        "https://api.hsforms.com/submissions/v3/integration/submit/244755533/bc1bde29-2a92-4e2e-9460-aa4d222112f1",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(hubspotData)
+        }
+    );
+
+    /* =========================
+       WAIT FOR BOTH
+       ========================= */
+    try {
+        const [sheetRes, hubspotRes] = await Promise.all([
+            googleSheetRequest,
+            hubspotRequest
+        ]);
+
+        if (!sheetRes.ok || !hubspotRes.ok) {
+            throw new Error("One of the submissions failed");
+        }
+
+        // ✅ SUCCESS
+        successMessage.style.display = "block";
+        document.getElementById('quranForm').reset();
+
+        successMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+        submitBtn.textContent = "Submitted";
+
+    } catch (err) {
+        console.error(err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Request Free Quran";
+    }
+});
+</script>
+
 </body>
 
 </html>
+
 
 
 
