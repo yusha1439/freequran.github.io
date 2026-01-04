@@ -757,8 +757,8 @@
             </div>
 
             <div class="form-group">
-                <label for="are_you">Are You (Just for research, can leave blank)</label>
-                <select id="are_you" name="are_you__just_for_research__can_leave_blank__">
+                <label for="religion">Are You (Just for research, can leave blank)</label>
+                <select id="religion" name="religion">
                     <option value="">Select</option>
                     <option value="Muslim">Muslim</option>
                     <option value="Atheist">Atheist</option>
@@ -798,7 +798,7 @@ document.getElementById('quranForm').addEventListener('submit', async function(e
             { name: "city", value: document.getElementById('city').value },
             { name: "state", value: document.getElementById('state').value },
             { name: "country", value: document.getElementById('country').value },
-            { name: "are_you__just_for_research__can_leave_blank__", value: document.getElementById('are_you').value },
+            { name: "religion", value: document.getElementById('religion').value },
             { name: "message", value: document.getElementById('message').value }
         ],
         context: {
@@ -1182,3 +1182,4 @@ document.getElementById('quranForm').addEventListener('submit', async function(e
 </body>
 
 </html>
+
