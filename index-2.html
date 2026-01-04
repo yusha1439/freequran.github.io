@@ -777,6 +777,10 @@
             <button type="submit" class="submit-btn" id="submitBtn">Request Free Quran</button>
         </form>
 <script>
+	function getValue(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+}
 document.getElementById('quranForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -1162,6 +1166,7 @@ fetch("https://script.google.com/macros/s/AKfycbyoyeAGgJMT33rHn5erji8ludhgmuOp5H
 </body>
 
 </html>
+
 
 
 
