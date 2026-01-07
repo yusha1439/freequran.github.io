@@ -954,6 +954,7 @@ document.getElementById('bulkOrderForm').addEventListener('submit', async functi
     sheetFormData.append("state", getValue("state"));
     sheetFormData.append("country", getValue("country"));
     sheetFormData.append("organization_type", getValue("organization_type"));
+	sheetFormData.append("no_of_copies", getValue("quantity"));
     sheetFormData.append("message", getValue("purpose"));
 
     const googleSheetRequest = fetch(
@@ -980,6 +981,7 @@ document.getElementById('bulkOrderForm').addEventListener('submit', async functi
             { name: "state", value: getValue("state") },
             { name: "country", value: getValue("country") },
             { name: "0-2/industry", value: getValue("organization_type") },
+			{ name: "no_of_copies", value: getValue("quantity") },
             { name: "message", value: getValue("purpose") }
         ],
         context: {
