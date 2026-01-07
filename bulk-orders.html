@@ -887,12 +887,12 @@ document.getElementById('bulkOrderForm').addEventListener('submit', async functi
     sheetFormData.append("email", getValue("email"));
     sheetFormData.append("phone", getValue("phone"));
     sheetFormData.append("address", getValue("address"));
-	sheetFormData.append("zip", getValue("zip"));
+	sheetFormData.append("zipcode", getValue("zip"));
     sheetFormData.append("city", getValue("city"));
     sheetFormData.append("state", getValue("state"));
     sheetFormData.append("country", getValue("country"));
     sheetFormData.append("organization_type", getValue("organization_type"));
-    sheetFormData.append("message", getValue("message"));
+    sheetFormData.append("message", getValue("purpose"));
 
     const googleSheetRequest = fetch(
         "https://script.google.com/macros/s/AKfycbyoyeAGgJMT33rHn5erji8ludhgmuOp5HW2AdHyG8omv8U5r34B0K2E4nVMbU17z3a0/exec",		
@@ -918,7 +918,7 @@ document.getElementById('bulkOrderForm').addEventListener('submit', async functi
             { name: "state", value: getValue("state") },
             { name: "country", value: getValue("country") },
             { name: "industry", value: getValue("organization_type") },
-            { name: "message", value: getValue("message") }
+            { name: "message", value: getValue("purpose") }
         ],
         context: {
             pageUri: window.location.href,
