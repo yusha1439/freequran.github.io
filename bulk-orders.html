@@ -1018,6 +1018,7 @@ document.getElementById('bulkOrderForm').addEventListener('submit', async functi
        GOOGLE SHEETS SUBMISSION
        ========================= */
     const sheetFormData = new FormData();
+	sheetFormData.append("form_type", "bulk");
     sheetFormData.append("name", getValue("organization"));
     sheetFormData.append("firstname", getValue("firstname"));
     sheetFormData.append("lastname", getValue("lastname"));
@@ -1031,7 +1032,7 @@ document.getElementById('bulkOrderForm').addEventListener('submit', async functi
     sheetFormData.append("industry", getValue("organization_type"));
     sheetFormData.append("message", getValue("message"));
 
-    /*const googleSheetRequest = fetch(
+    const googleSheetRequest = fetch(
         "https://script.google.com/macros/s/AKfycbyoyeAGgJMT33rHn5erji8ludhgmuOp5HW2AdHyG8omv8U5r34B0K2E4nVMbU17z3a0/exec",		
         {
             method: "POST",
