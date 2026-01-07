@@ -881,7 +881,7 @@ document.getElementById('bulkOrderForm').addEventListener('submit', async functi
        ========================= */
     const sheetFormData = new FormData();
 	sheetFormData.append("form_type", "bulk");
-    sheetFormData.append("name", getValue("organization"));
+    sheetFormData.append("organization_name", getValue("organization"));
     sheetFormData.append("firstname", getValue("firstname"));
     sheetFormData.append("lastname", getValue("lastname"));
     sheetFormData.append("email", getValue("email"));
@@ -891,7 +891,7 @@ document.getElementById('bulkOrderForm').addEventListener('submit', async functi
     sheetFormData.append("city", getValue("city"));
     sheetFormData.append("state", getValue("state"));
     sheetFormData.append("country", getValue("country"));
-    sheetFormData.append("industry", getValue("organization_type"));
+    sheetFormData.append("organization_type", getValue("organization_type"));
     sheetFormData.append("message", getValue("message"));
 
     const googleSheetRequest = fetch(
